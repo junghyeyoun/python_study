@@ -194,6 +194,7 @@ for i in range(1,101):
 print('합 : ',tot)
 
 # 문3 : 주사위를 두 번 던져 나온 숫자들의 합이 배수가 되는 경우만 출력
+
 import random
 
 for _ in range(1, 37):
@@ -201,3 +202,11 @@ for _ in range(1, 37):
     n2 = random.randint(1, 6)
     if (n1 + n2) % 4 == 0:
         print(n1, n2)
+
+# 난수는 중복되는 숫자도 나옴
+
+
+for i in range(1,7):
+    for j in range(1,7):
+        if (i+j) %4 ==0:
+            print("{}   {}".format(i,j))
