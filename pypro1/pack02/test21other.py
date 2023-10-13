@@ -1,7 +1,7 @@
-import pack2.test21singer
+import pack02.test21singer
 
 def process():
-    jungkuk = pack2.test21singer.Singer()
+    jungkuk = pack02.test21singer.Singer()
     print('타이틀 송 : ',jungkuk.title_song)
     jungkuk.sing()
     jungkuk.title_song = '정국 찬양가'
@@ -9,15 +9,15 @@ def process():
     print('소속사 가 '+jungkuk.co + '인 가수의 노래 '+jungkuk.title_song)
 
     print()
-    iu = pack2.test21singer.Singer()   
+    iu = pack2.test21singerpack02er()   
     print('타이틀 송 : ',iu.title_song)
     iu.sing()
     # print('소속사 가 '+iu.co + '인 가수의 노래 '+iu.title_song) => err : iu는 co가 없기 때문에
-    print(id(pack2.test21singer.Singer),id(iu)) # 2495509918336 2495508728144 다름
+    print(id(pack2.test21singer.Singer),id(iu)) # 2pack029918336 2495508728144 다름
     
     print()
     bp = pack2.test21singer.Singer 
-    print(id(pack2.test21singer.Singer),id(bp)) # 2307711105200 2307711105200 => 주소 같음
+    print(idpack022.test21singer.Singer),id(bp)) # 230pack0205200 2307711105200 => 주소 같음
    # print(bp.sing()) # TypeError: Singer.sing() missing 1 required positional argument: 'self'
     
 if __name__ == '__main__':

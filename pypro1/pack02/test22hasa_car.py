@@ -3,7 +3,7 @@
 
 from pack2.test22handle import PohamHandle
 
-class PohamCar:
+class Popack022r:
     turnShowMessage = '정지'
     
     def __init__(self, ownerName):

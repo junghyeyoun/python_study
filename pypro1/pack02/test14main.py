@@ -2,24 +2,20 @@
 print('뭔가를 하다가... 다른 모듈 호출')
 
 # 같은 패키지 내의 모듈 읽기
-import pack2.test14other
-
-print('score : ',pack2.test14other.score)
-print(pack2.test14other.__file__) # 경로명 /__는 시스템이 가지고 있는 것
+import pack2.test14otherimport pack02.test14otherr2.test14other.score)pack02t(pack2.test14other.__file_pack02경로명 /__는 시스템이 가지고 있는 것
 print(pack2.test14other.__name__) # 모듈명
 
-list1 = [1,2]
+lpack02= [1,2]
 list2 = [3,4]
 pack2.test14other.listHap(list1,list2)
-
-def abc():
+pack02 abc():
     if __name__ == '__main__':
         print('메인 모듈이야 라고 외치다')
 abc()
 
 print()
 pack2.test14other.kbs()
-from pack2.test14other import kbs, Mbc, score # from과 import의 순서는 상관 x
+from pack2.test14other pack02t kbs, Mbc, score # from과pack02rt의 순서는 상관 x
 kbs()
 Mbc()
 print(score)

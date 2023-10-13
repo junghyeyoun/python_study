@@ -22,7 +22,7 @@ my = MyClass()
 my.show()
 
 from pack2.test20other import Our
-print(Our.a)
+print(Opack02
 print()
 print('our1 ---------')
 our1 = Our()
