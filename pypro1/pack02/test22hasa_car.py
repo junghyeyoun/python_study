@@ -1,9 +1,9 @@
 # 클래스의 포함 관계 : 자원의 재활용이 목적 (약결합)
 # 완성차를 조립하기 위해 여러 개의 부품(여기서는 핸들로 한정)을 객체로 만들어 불러다 사용
 
-from pack2.test22handle import PohamHandle
+from pack02.test22handle import PohamHandle
 
-class Popack022r:
+class PohamCar:
     turnShowMessage = '정지'
     
     def __init__(self, ownerName):

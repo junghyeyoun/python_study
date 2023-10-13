@@ -21,9 +21,8 @@ class MyClass:
 my = MyClass()
 my.show()
 
-from pack2.test20other import Our
-print(Opack02
-print()
+from pack02.test20other import Our
+print() 
 print('our1 ---------')
 our1 = Our()
 print(our1.a)

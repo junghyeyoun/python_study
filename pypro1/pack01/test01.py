@@ -2,8 +2,6 @@
 여러줄 주석 (작은 따옴표, 큰 따옴표 구별 x)
 '''
 # 한줄 주석
-from future.builtins.misc import oct
-from sqlalchemy.sql.expression import false
 print('환영합니다. 파이썬 세상 만세')
 # 한줄에 여러개 쓸데는 세미콜론 쓰고 한문장일때는 안써도 ㄱㅊ
 
