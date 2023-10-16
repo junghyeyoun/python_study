@@ -14,7 +14,7 @@ class Employee(metaclass = ABCMeta):
         
     @abstractmethod
     def data_print(self):
-        print('이름 : '+self.irum+', 나이 : ',format(self.nai), end=' ')
+        pass
     
     def irumnai_print(self):
-        pass
+        print('이름 : '+self.irum+', 나이 : {}'.format(self.nai), end=' ')

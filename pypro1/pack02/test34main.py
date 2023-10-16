@@ -12,11 +12,11 @@ class Temporary(Employee):
         self.pay = self.ilsu*self.ildang 
     
     def data_print(self):
-        super().data_print()  
-        print(',월급: ',format(self.pay))
+        t.pay()
+        super().irumnai_print()  
+        print(',월급: {}'.format(self.pay))
 
 t = Temporary('홍길동',23,20,15000)
-t.pay()
 t.data_print()
 
 class Regular(Employee):
@@ -28,8 +28,8 @@ class Regular(Employee):
         pass
     
     def data_print(self):
-        super().data_print() 
-        print(', 급여 : ',format(self.salary), end=' ')
+        super().irumnai_print() 
+        print(', 급여 : {}'.format(self.salary))
     
 r = Regular('한국인',27,3500000)
 r.data_print()
@@ -44,11 +44,10 @@ class Salesman(Regular):
         self.pay = self.salary + (self.sales * self.commision)
         
     def data_print(self):
-        print()
-        super().data_print()
-        print(',수령액 : ',format(self.pay))
+        s.pay()
+        super().irumnai_print()
+        print(',수령액 :{} '.format(round(self.pay))) # 정수 타입으로 변환
         
 s = Salesman('손오공',29,1200000,5000000,0.25)
-s.pay()
 s.data_print()
         
