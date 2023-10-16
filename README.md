@@ -18,5 +18,3 @@
 <a href="https://velog.io/@tnsida315/%EC%83%9D%EC%84%B1%EC%9E%90python-java-%EB%B9%84%EA%B5%90">생성자</a>
 <a href="https://velog.io/@tnsida315/%ED%8F%AC%ED%95%A8%EA%B3%BC-%EC%83%81%EC%86%8D-java%EC%99%80-%EB%B9%84%EA%B5%90">포함과 상속</a>
 <a href="https://velog.io/@tnsida315/%EC%B6%94%EC%83%81%ED%81%B4%EB%9E%98%EC%8A%A4-python-java-%EB%B9%84%EA%B5%90">추상클래스</a>
-<a href=""></a>
-<a href=""></a>
