@@ -31,7 +31,7 @@ def chulbal():
         # print(sql)
         cursor.execute(sql)
         datas = cursor.fetchall()
-       #  print(datas)
+        #  print(datas)
         print(len(datas))
         
         if len(datas) == 0:
