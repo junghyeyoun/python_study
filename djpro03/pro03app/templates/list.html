@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<link rel="stylesheet" type="text/css" href="/static/css/test.css">
+	<script type="text/javascript" src="/static/js/test.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	<!--
+	<script>
+		window.onload = function(){
+			alert("자바 스크립트");
+		}
+	</script>
+	-->
+	<script>
+		$().ready(function(){
+			alert("자바 스크립트 Jquery");
+			
+			$('#myImg').click(function(){
+				abc();
+			});
+		});
+	</script>
+</head>
+
+<body>
+	<!-- 결과는 {{객채.속성}} -->
+	결과는 {{irum}}
+	<p />
+	<img src="/static/images/abc.png" id="myImg"><br>
+	<button onclick="abc()">뒤로 이동</button>
+</body>
+
+</html>

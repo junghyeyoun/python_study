@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+자료입력</p>
+<form action="/our/insert" method="post">{% csrf_token %} <!--서버가 발행한 토큰값을 그대로 들고감-->
+	이름 : <input type="text" name="name">
+	<input type="submit" value="확인">
+</form>
+</body>
+</html>
