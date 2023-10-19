@@ -1,4 +1,4 @@
-![header](https://capsule-render.vercel.app/api?type=rounded&color=002472&height=300&section=header&text=web&fontSize=80&fontColor=FFFFFF&stroke=gray&strokeWidth=2&animation=blinking)
+![header](https://capsule-render.vercel.app/api?type=rounded&color=002472&height=300&section=header&text=python&fontSize=80&fontColor=FFFFFF&stroke=gray&strokeWidth=2&animation=blinking)
 
 # 💡 머리말
  자바를 배운 후 파이썬을 배웠기 때문에 자바와 파이썬의 차이에 대해 집중적으로 블로그를 작성하려고 한다. 이름 개념은 벨로그에 소스코드는 깃허브에 올릴 예정이다.
