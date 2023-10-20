@@ -1,0 +1,19 @@
+{% load static %} <!-- 리소스를 static 에 다가 가져온 사실-->
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="{% static 'css/test.css' %}">
+</head>
+<body>
+나는야 머리글 !!!!!!!!!!!!
+<hr>
+{% block content %}
+{% endblock %}
+<hr>
+{% include  "footer.html" %}
+</body>
+</body>
+</html>
