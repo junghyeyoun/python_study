@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	window.onload = function() {
+		document.querySelector("#btnOk").onclick = function() {
+			frm.submit();
+		}
+	}
+</script>
+</head>
+<body>
+<table>
+	<tr>
+		<td>
+			<img src="/static/images/pic2.png" style="width: 50%;">
+		</td>
+		<td>
+			<pre>
+				프링글스버즈케이스빨강
+				20000원
+			</pre>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<form action="cart" name="frm" method="post"> {% csrf_token %}
+				<input type="hidden" name="name" value="프링글스버즈케이스빨강">
+				<input type="hidden" name="price" value="20000">
+				<input type="button" id="btnOk" value="장바구니에 담기">
+				<input type="button" value="홈으로" onclick="history.back()">
+			</form>
+		</td>
+	</tr>
+</table>
+</body>
+</html>

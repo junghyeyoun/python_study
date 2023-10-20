@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<table border="1">
+	<tr><th> 번호</th><th>상품명</th><th>가격</th></tr>
+	{% if products %}
+		{% for pro in products%}
+		<tr>
+			<td>{{forloop.revcounter}}</td>
+			<td>{{pro.name}}</td>
+			<td>{{pro.price}}</td>
+		</tr>
+		{% endfor %}
+	{% else %}
+	<tr><td colspan="3">장바구니에 등록된 상품이 없습니다.</td></tr>
+	{% endif %}
+</table>
+<br>
+<a href="/buy">결제하기</a>
+<a href="/"> 메인 페이지</a>
+</body>
+</html>

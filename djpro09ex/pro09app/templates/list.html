@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+<script src="/static/js/test.js"></script>
+</head>
+<body>
+	{% extends 'header.html' %}
+	{% block content %}
+<div style="width: 1050px; margin: 0 auto;">
+<h2>친구 목록</h2>
+{% if datas.count > 0%}
+
+	<table class="table" >
+		<thead>
+		<tr><th>아이디</th><th>이름</th><th>주소</th><th>나이</th></tr>
+		</thead>
+		{% for a in datas%}
+		<tr>
+			<td>{{a.id}}</td>
+			<td>{{a.irum}}</td>
+			<td>{{a.juso}}</td>
+			<td>{{a.nai}}</td>
+		</tr>
+		{% endfor %}
+	</table>
+
+{% else %}
+<p>자료가 없어요</p>
+&nbsp;{% endif %}
+&nbsp;건수 : {{su}}명
+<button class="btn btn-dark rounded-pill px-3" type="button" id="btnHome">홈으로</button>
+</div>
+ {% endblock %}
+</body>
+</html>
