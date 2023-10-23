@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h3>제품 목록</h3>
+<table border="1">
+	<tr>
+		<th>번호</th><th>제품명</th><th>가격</th><th>제조사</th>
+	</tr>
+	{% for p in products %}
+	<tr>
+		<td>{{p.id}}</td>
+		<td><a href="/list3?id={{p.id}}">{{p.pname}}</a></td>
+		<td>{{p.pprice}}</td>
+		<td>{{p.pmaker_name}}</td> <!-- 실제로 들어간 값은 pk인 id임 하지만 보여지는 것은 mname이 보임 -->
+	</tr>
+	{% endfor %}
+	<tr>
+		<td colspan="4">건수 : {{pcount}} </td>
+	</tr>
+</table>
+</body>
+</html>

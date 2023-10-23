@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	window.onload = function() {
+		document.getElementById("btnOk").onclick=confirmFunc;
+		document.getElementById("btnShow").onclick=function() {
+			location.href = "/guest/select";
+		};
+	}
+	function confirmFunc() {
+		if(frm.name.value == "") {
+			frm.name.placeholder = "이름을 입력하세요"
+			return false;
+		}
+		if(frm.age.value == "") {
+			frm.age.placeholder = "이름을 입력하세요"
+			return false;
+		}
+		if(frm.tel.value == "") {
+			frm.tel.placeholder = "이름을 입력하세요"
+			return false;
+		}
+		frm.submit()
+	}
+</script>
+</head>
+<body>
+**  글 등록 **<p/>
+<form action="/guest/insertok" method="post" name="frm" onsubmit="return false" >{% csrf_token %}
+	<table>
+		<tr>
+			<td>이름</td>
+			<td><input type="text" name="name"/> </td>
+		</tr>
+		<tr>
+			<td>나이</td>
+			<td><input type="number" name="age"/></td>
+		</tr>
+		<tr>
+			<td>전화</td>
+			<td><input type="text" name="tel"/> </td>
+		</tr>
+		<tr>
+			<td>성별</td>
+			<td><input type="radio" name="gen" value="남"/>남
+					<input type="radio" name="gen" value="여"/>여 </td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<input type="button" id="btnOk" value="등록하기" /> 
+				<input type="button" id="btnShow" value="목록보기" /> 
+			</td>
+		</tr>
+	</table>
+</form>
+</body>
+</html>

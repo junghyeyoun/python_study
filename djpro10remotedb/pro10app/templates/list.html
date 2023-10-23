@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+** 글 목록 **<p/>
+<a href="insert">자료 등록</a> <!-- /guest/insert-->
+<br>
+<table border="1">
+	<tr><th>아이디</th><th>제목</th><th>내용</th><th>등록일</th></tr>
+	{% if gdatas %}
+	{% for g in gdatas %}
+	<tr>
+		<td>{{g.id}}</td>
+		<td>{{g.title}}</td>
+		<td>{{g.content}}</td>
+		<td>{{g.regdate}}</td>
+	</tr>
+	{% endfor %}
+	{% else %}
+	<tr>
+		<td colspan="4">등록된 글이 없습니다.</td>
+	</tr>
+	{% endif %}
+</table>
+</body>
+</html>

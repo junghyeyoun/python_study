@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+** 글 목록 **<p/>
+<a href="insert">자료 등록</a> 
+<br>
+<table border="1">
+	<tr><th>id</th><th>이름</th><th>나이</th><th>전화</th><th>성별</th></tr>
+	{% if fdatas %}
+	{% for f in fdatas %}
+	<tr>
+		<td>{{f.id}}</td>
+		<td>{{f.name}}</td>
+		<td>{{f.age}}</td>
+		<td>{{f.tel}}</td>
+		<td>{{f.gen}}</td>
+	</tr>
+	{% endfor %}
+	<tr>
+		<td colspan="5">인원수 : {{su}}명</td>
+	</tr>
+	<tr>
+    <td colspan="5">평균 나이: {{ average_age}}</td>
+</tr>
+	{% else %}
+	<tr>
+		<td colspan="5">등록된 글이 없습니다.</td>
+	</tr>
+	{% endif %}
+</body>
+</html>

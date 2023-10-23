@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	window.onload = function() {
+		document.getElementById("btnOk").onclick=confirmFunc;
+		document.getElementById("btnShow").onclick=function() {
+			location.href = "/guest/select";
+		};
+	}
+	function confirmFunc() {
+		if(frm.title.value == "") {
+			frm.title.placeholder = "제목을 입력하세요"
+			return false;
+		}
+		frm.submit()
+	}
+</script>
+</head>
+<body>
+**  글 등록 **<p/> <!-- onsubmit="return false" => enter쳐도 값 안넘어감 -->
+<form action="/guest/insertok" method="post" name="frm" onsubmit="return false" >{% csrf_token %}
+	<table>
+		<tr>
+			<td>제목</td>
+			<td><input type="text" name="title"/> </td>
+		</tr>
+		<tr>
+			<td>내용</td>
+			<td><textarea row="5" cols="50" name="content"></textarea> </td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<input type="button" id="btnOk" value="등록하기" /> 
+				<input type="button" id="btnShow" value="목록보기" /> 
+			</td>
+		</tr>
+	</table>
+</form>
+</body>
+</html>
