@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script>
+		function func(arg) {
+			// alert(arg)
+
+			let result = confirm("정말 삭제할까요?");
+			if (result) {
+				document.getElementById(arg).submit();
+				frm.submit()
+			}
+		}
+	</script>
+</head>
+
+<body>
+	<h2>상품 정보(페이징)</h2>
+	<div style="width: 80%; text-align: right;">
+		<a href="/sangpum/insert">상품추가</a>
+	</div>
+	<table border="1" style="width: 80%;">
+		<tr>
+			<th>코드</th>
+			<th>상품</th>
+			<th>수량</th>
+			<th>단가</th>
+			<th>기타</th>
+		</tr>
+		{% if datas %}
+		{% for s in datas %}
+		<tr>
+			<td>{{s.code}}</td>
+			<td>{{s.sang}}</td>
+			<td>{{s.su}}</td>
+			<td>{{s.dan}}</td>
+			<td>
+				<a href="/sangpum/update?code={{s.code}}">수정</a> /
+				<form action="/sangpum/delete" method="get" style="display: inline;" id="{{s.code}}">
+					<input type="hidden" name="code" value="{{s.code}}" />
+					<a href="javascript:void(0); onclick=func({{s.code}}) ">삭제</a>
+				</form>
+			</td>
+		</tr>
+		{% endfor %}
+		<!-- 페이징 -->
+		<tr>
+			<td colspan="5">
+				{% if datas.paginator.num_pages > 1 %}
+				<div>
+					{% if datas.has_previous %}
+					<a href="/sangpum/list?page={{datas.previous_page_number}}">&laquo;이전</a>
+					{% endif %}
+					{% if datas.has_next %}
+					<a href="/sangpum/list?page={{datas.next_page_number}}">다음&raquo;</a>
+					{% endif %}
+					&nbsp; &nbsp;
+					(페이지 : {{datas.number}} / {{datas.paginator.num_pages}})
+				</div>
+				{% endif %}
+
+				<!-- 숫자로 -->
+
+				<hr/>
+            {% for p in allpage %}
+               {% if p > 0 %}
+                  {% if p == datas.number %}
+                     [{{p}}]
+                  {% elif p != datas.number %}
+                     <a href="/sangpum/list?page={{p}}">{{p}}</a>
+                  {% endif %}
+               {% endif %}
+            {% endfor %}
+
+
+			</td>
+		</tr>
+		{% else %}
+		<tr>
+			<td colspan="4">상품이 없습니다.</td>
+		</tr>
+		{% endif %}
+	</table>
+</body>
+
+</html>
