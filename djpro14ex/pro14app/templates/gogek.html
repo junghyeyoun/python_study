@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h2>고객 정보</h2>
+<table border="1" style="width:50%;">
+	<tr><th>고객번호</th><th>고객명</th><th>성별</th><th>고객전화</th></tr>
+	{% if datas %}
+	{% for g in datas %}
+	<tr>
+		<td>{{g.gogek_no}}</td>
+		<td>{{g.gogek_name}}</td>
+		<td>{{g.gen}}</td>
+		<td>{{g.gogek_tel}}</td>
+	</tr>
+	{% endfor %}
+	{% else %}
+	<tr><td colspan="4">정보가 없습니다.</td></tr>
+	{% endif %}
+</table>
+</body>
+</html>

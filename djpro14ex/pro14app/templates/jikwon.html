@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h2>직원 정보</h2>
+<table border="1" style="width:50%;">
+	<tr><th>직원번호</th><th>직원명</th><th>직급</th><th>관리고객</th></tr>
+	{% if datas %}
+	{% for j in datas %}
+	<tr>
+		<td>{{j.jikwon_no}}</td>
+		<td>
+			 {% if j.gogek_damsano_count > 0 %}
+                <a href="/gogek?jikwon_no={{ j.jikwon_no }}">{{ j.jikwon_name }}</a>
+            {% else %}
+                {{ j.jikwon_name }}
+            {% endif %}
+		</td>
+		<td>{{j.jikwon_jik}}</td>
+		<td>{{ j.gogek_damsano_count }}</td>
+	</tr>
+	{% endfor %}
+	{% else %}
+	<tr><td colspan="4">정보가 없습니다.</td></tr>
+	{% endif %}
+</table>
+</body>
+</html>
