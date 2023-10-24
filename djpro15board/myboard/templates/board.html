@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+</head>
+<body style="margin:20px;">
+<div style="width:95%; text-align:  center;">
+	<h3>게시판</h3>
+</div>
+<a href="/board/insert">글 쓰기</a><br>
+<table style="width:95%;" class="table">
+	<tr>
+		<th>번호</th><th>제목</th><th>작성자</th><th>작성일</th><th>조회수</th>
+	</tr>
+	{% if datas %}
+	{% for d in datas %}
+	<tr>
+		<td>{{d.id}}</td>
+		<td>
+			<a href="/board/content?id={{d.id}}&page={{datas.number}}">
+			{{d.title}}</a>
+		</td>
+		<td>{{d.name}}</td>
+		<td>{{d.bdate.year}}년 {{d.bdate.month}}월 {{d.bdate.day}}일</td>
+		<td>{{d.readcnt}}</td>
+		
+	</tr>
+	{% endfor %}
+	{% else %}
+	<tr>
+		<td colspan="5">글이 없습니다.</td>
+	</tr>	
+	{% endif %}
+<tr>
+   <td colspan="6" style="text-align: center;">
+           <form action="/board/search" method="post">{%csrf_token%}
+                     <select name="s_type">
+                                <option value="title" selected>글제목</option>
+                                <option value="name">작성자</option>
+                     </select>
+                     <input type="text" name="s_value">
+                     <input type="submit" value="검색">
+           </form>
+   </td>
+</tr>
+<!-- 페이징 -->
+		<tr>
+			<td colspan="5" style="text-align: center;">
+				{% if datas.paginator.num_pages > 1 %}
+				<div>
+					{% if datas.has_previous %}
+					<a href="/board/list?page={{datas.previous_page_number}}">&laquo;이전</a>
+					{% endif %}
+					{% if datas.has_next %}
+					<a href="/board/list?page={{datas.next_page_number}}">다음&raquo;</a>
+					{% endif %}
+					&nbsp; &nbsp;
+					(페이지 : {{datas.number}} / {{datas.paginator.num_pages}})
+				</div>
+				{% endif %}
+</table>
+</body>
+</html>
