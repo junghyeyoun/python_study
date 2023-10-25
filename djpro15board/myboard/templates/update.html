@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<script>
+	window.onload = function() {
+		document.querySelector("#btnUpdate").onclick = chkFunc;
+	}
+	
+	function chkFunc() {
+		if(upfrm.name.value === ""){
+			upfrm.name.placeholder = "작성자를 입력하시오";
+			upfrm.name.focus();
+			return false;
+		}
+		// 나머지는 생략
+		upfrm.submit();
+	}
+</script>
+</head>
+<body style="margin:20px;">
+<h2>게시글 수정</h2>
+<form action="/board/update" name="upfrm" method="post">{% csrf_token %}
+	<input type="hidden" name="id" value="{{data.id}}"/>
+	<table style="width: 95%;" class="table">
+		<tr>
+			<td>작성자</td>
+			<td><input type="text" name="name" value="{{data.name}}"></td>
+		</tr>
+		<tr>
+			<td>비밀번호</td>
+			<td><input type="text" name="up_passwd"><span style="color:red;">{{upmsg}}</span></td>
+		</tr>
+		<tr>
+			<td>이메일</td>
+			<td><input type="text" name="mail" value="{{data.mail}}"></td>
+		</tr>
+		<tr>
+			<td>글제목</td>
+			<td><input type="text" name="title" value="{{data.title}}"></td>
+		</tr>
+		<tr>
+			<td>글내용</td>
+			<td><textarea rows="5" style="width: 99%;" name="cont">{{data.cont}}</textarea></td>
+		</tr>
+		<tr>
+			<td colspan="2" style="text-align: center;">
+				<input type="button" value="수정" id="btnUpdate" class="btn btn-dark rounded-pill px-3">
+				<input type="button" value="이전" onclick="history.back()" class="btn btn-dark rounded-pill px-3">
+			</td>
+		</tr>
+	</table>
+</form>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+</head>
+<body style="margin : 20px;">
+<h2>{{data.id}}번 게시글 내용</h2>
+<table class="table">
+	<tr style="width: 95%;">
+		<td style="text-align: right; width: 95%;">
+			<a href="/board/reply?id={{data.id}}">답글</a>
+			<a href="/board/update?id={{data.id}}">수정</a>
+			<a href="/board/delete?id={{data.id}}">삭제</a>
+			<a href="/board/list?page={{page}}">목록</a>
+		</td>
+	</tr>
+</table>
+<table class="table"> 
+	<tr style="width:95%; background-color:  lightgray;">
+		<td>
+			작성자 :  <a href="mailto:{{data.mail}}">{{data.mail}} (ip:{{data.bip}})</a>
+		</td>
+		<td>작성일 : {{data.bdate}}</td>
+		<td>조회수 : {{data.readcnt}}</td>
+	</tr>
+	<tr>
+		<td colspan="3">제목 : {{data.title}}</td>
+	</tr>
+	<tr>
+		<td colspan="3">
+			<textarea rows="5" style="width: 100%;" readonly>{{data.cont}}</textarea>
+		</td>
+	</tr>
+</table>
+</body>
+</html>

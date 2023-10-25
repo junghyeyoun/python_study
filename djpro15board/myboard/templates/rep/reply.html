@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<script>
+	window.onload = function() {
+		document.querySelector("#btnReplyOk").onclick = chkFunc;
+	}
+	
+	function chkFunc() {
+		if(repfrm.name.value === ""){
+			repfrm.name.placeholder = "작성자를 입력하시오";
+			repfrm.name.focus();
+			return false;
+		}
+		// 나머지는 생략
+		repfrm.submit();
+	}	
+</script>
+</head>
+<body style="margin:20px;">
+
+<h2>답글 달기</h2>
+<form action="/board/replyok" name="repfrm" method="post">{% csrf_token %}
+	<input type="hidden" name="id" value="{{data_one.id}}"/>
+	<input type="hidden" name="gnum" value="{{data_one.gnum}}"/>
+	<input type="hidden" name="onum" value="{{data_one.onum}}"/>
+	<input type="hidden" name="nested" value="{{data_one.nested}}"/>
+	<table style="width: 95%;" class="table">
+		<tr>
+			<td>작성자</td>
+			<td><input type="text" name="name" ></td>
+		</tr>
+		<tr>
+			<td>비밀번호</td>
+			<td><input type="text" name="passwd"></td>
+		</tr>
+		<tr>
+			<td>이메일</td>
+			<td><input type="text" name="mail" ></td>
+		</tr>
+		<tr>
+			<td>글제목</td>
+			<td><input type="text" name="title" style="width: 99%;" value="[RE] {{data_one.title}}"></td>
+		</tr>
+		<tr>
+			<td>글내용</td>
+			<td><textarea rows="5" style="width: 99%;" name="cont"></textarea></td>
+		</tr>
+		<tr>
+			<td colspan="2" style="text-align: center;">
+				<input type="button" value="등록" id="btnReplyOk" class="btn btn-dark rounded-pill px-3">
+				<input type="button" value="이전" onclick="history.back()" class="btn btn-dark rounded-pill px-3">
+			</td>
+		</tr>
+	</table>
+</form>
+</body>
+</html>

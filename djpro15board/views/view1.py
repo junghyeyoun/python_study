@@ -90,10 +90,56 @@ def searchFunc(request):
         return render(request,'board.html',{'datas':datas})
 
 def contentFunc(request):
-    return render(request, )
+    page = request.GET.get('page')
+    data = BoardTab.objects.get(id=request.GET.get('id'))
+    data.readcnt = data.readcnt + 1
+    data.save() # 조회수 갱신
+    
+    return render(request, 'content.html',{'data':data,'page':page})
 
 def updateFunc(request):
-    return render(request, )
+    if request.method == 'GET':
+        try:
+            data = BoardTab.objects.get(id=request.GET.get('id'))
+            return render(request, 'update.html',{'data':data})
+        except Exception as e:
+            print('수정 자료 읽기 오류 : ',e)
+            return render(request,'error.html')
+    elif request.method == 'POST':
+        try:
+            updata = BoardTab.objects.get(id=request.POST.get('id'))
+            # 비밀번호 비교
+            if updata.passwd == request.POST.get('up_passwd'):
+                updata.name = request.POST.get('name')
+                updata.mail = request.POST.get('mail')
+                updata.title = request.POST.get('title')
+                updata.cont = request.POST.get('cont')
+                updata.save()
+                return redirect('/board/list')
+            else:
+                return render(request, 'update.html',{'data':updata,'upmsg':'비밀번호 불일치!'})
+        except Exception as e:
+            print('수정 자료 처리 오류 : ',e)
+            return render(request,'error.html')
+    
 
 def deleteFunc(request):
+    if request.method == 'GET':
+        try:
+            deldata = BoardTab.objects.get(id=request.GET.get('id'))
+            return render(request, 'delete.html',{'data':deldata})
+        except Exception as e:
+            print('삭제 자료 읽기 오류 : ',e)
+            return render(request,'error.html')
+    elif request.method == 'POST':
+        try:
+            deldata = BoardTab.objects.get(id=request.POST.get('id'))
+            if deldata.passwd == request.POST.get('del_passwd'):
+                deldata.delete()
+                return redirect('/board/list') # 삭제후 목록 보기
+            else:
+                return render(request,'error.html')
+        except Exception as e:
+            print('삭제 자료 처리 오류 : ',e)
+            return render(request,'error.html')
     return render(request, )

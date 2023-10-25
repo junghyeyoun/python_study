@@ -1,5 +1,5 @@
 from django.urls import path
-from views import view1   
+from views import view1, view2   
 
 urlpatterns = [
     path('list',view1.listFunc),
@@ -10,4 +10,6 @@ urlpatterns = [
     path('delete',view1.deleteFunc),
     
     # 댓글은 view2에서 처리
+    path('reply',view2.replyFunc),
+    path('replyok',view2.replyokFunc),
 ]
