@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+let xhr;
+
+// btn1
+	window.onload = function(){
+		document.querySelector("#btn1").addEventListener("click", ()=>{
+			xhr = new XMLHttpRequest();
+			
+			xhr.onreadystatechange = function(){
+				if(xhr.readyState === XMLHttpRequest.DONE){
+					if(xhr.status === 200){
+						process1();
+					}
+				}
+			}
+			
+			url = "calldb1";
+			xhr.open("GET", url, true);
+			xhr.send();
+		});
+		
+		function process1(){
+			// alert(xhr.responseText);
+			let parseData = JSON.parse(xhr.responseText)
+			// alert(parseData) // Object
+			
+			let str = "<table border='1'><tr><th>code</th><th>sang</th><th>su</th><th>dan</th><tr> "
+			let count = 0;
+			for (let i=0; i <parseData.length; i++) {
+				str += "<tr>"
+				str += "<td>"+parseData[i].code + "</td>";
+				str += "<td>"+parseData[i].sang + "</td>";
+				str += "<td>"+parseData[i].su + "</td>";
+				str += "<td>"+parseData[i].dan + "</td>";
+				str += "</tr>"
+				count += 1;
+			}
+			str += "</table>"
+			str += "<br>건수 : "+count
+			document.querySelector("#show1").innerHTML = str;
+		}
+		
+// btn2		
+		document.querySelector("#btn2").onclick = function(){
+		const url ="calldb2";
+		fetch(url).then(res=> {
+			if(res.status===200){
+				return res.json()
+			}else {
+				console.error(`http err status : ${res.statues}`)
+			}
+		})
+		.then(jsonData => {
+			process2(jsonData)
+		})
+		.catch(err => {
+			console.log(err)
+		})
+	}
+	
+         function process2(jsonData) {
+           let str = "<table border='1'><tr><th>code</th><th>sang</th><th>su</th><th>dan</th><tr> "
+			let count = 0;
+           for (let i=0; i <jsonData.length; i++) {
+				str += "<tr>"
+				str += "<td>"+jsonData[i].code + "</td>";
+				str += "<td>"+jsonData[i].sang + "</td>";
+				str += "<td>"+jsonData[i].su + "</td>";
+				str += "<td>"+jsonData[i].dan + "</td>";
+				str += "</tr>"
+				count += 1;
+			}
+			str += "</table>"
+			str += "<br>건수 : "+count;
+            document.querySelector("#show2").innerHTML = str;
+         }
+}
+	
+	
+</script>
+</head>
+<body>
+Ajax로 상품 정보 얻기
+<button id="btn1">실습(전통적)</button>
+<br>
+<div id="show1"></div>
+<hr>
+<button id="btn2">실습2(fetch)</button>
+<br>
+<div id="show2"></div>
+</body>
+</html>
