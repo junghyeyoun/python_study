@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+{% if data %}
+		<p>직원명 : {{data.jikwon_name}}</p>
+        <p>직급 : {{data.jikwon_jik}}</p>
+        <p>부서번호 : {{data.buser_num}}</p>
+{% else %}
+        <p>담당직원이 없습니다.</p>
+ {% endif %}
+</body>
+</html>
