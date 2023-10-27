@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+    let xhr;
+
+    window.onload = function(){
+        document.querySelector("#btn1").addEventListener("click", () => {
+            xhr = new XMLHttpRequest();
+
+            xhr.onreadystatechange = function(){
+                if(xhr.readyState === XMLHttpRequest.DONE){
+                    if(xhr.status === 200){
+                        process1();
+                    }
+                }
+            }
+
+            url = "burger";
+            xhr.open("GET", url, true)
+            xhr.send();
+        })
+
+        function process1(){
+            let data = JSON.parse(xhr.responseText);
+            let str = "<table border='1'><tr><th>제품명</th><th>설명</th><th>가격</th><th>주문수량</th></tr>"
+
+            for(let i=0; i<data.length; i++){
+                str += "<tr>";
+                str += "<td>" + data[i].pname + "</td>";
+                str += "<td>" + data[i].description + "</td>";
+                str += "<td>" + data[i].price + "</td>";
+                str += "<td>" + "<input type='number' value='0' min='0' name='burgersu' id='burgersu" + i + "'>" + "</td>";
+                str += "</tr>";
+            }
+
+            str += "</table>";
+            str += "<input type='button' id='btn3' name='order' value='확인'>"
+            document.querySelector("#show1").innerHTML = str;
+
+            document.querySelector("#btn3").onclick = function(){
+                let burgerTotal = 0;
+
+                for (let i = 0; i < data.length; i++) {
+                    let quantity = parseInt(document.querySelector("#burgersu" + i).value, 10);
+                    if (isNaN(quantity)) {
+                        quantity = 0;
+                    }
+                    let price = data[i].price;
+                    burgerTotal += quantity * price;
+                }
+
+                document.querySelector("#show2").innerHTML = "<br>" + "총 버거 가격: " + burgerTotal + " 원" + "&nbsp;&nbsp;&nbsp;" +
+                "<input type='button' id='btn5' value='계산 확인'>";
+                
+                document.querySelector("#btn5").onclick = function(){
+				    let result = "";
+				
+				    for (let i = 0; i < data.length; i++) {
+				        let inputElement = document.querySelector("#burgersu" + i);
+				        let quantity = parseInt(inputElement.value, 10);
+				        if (isNaN(quantity)) {
+				            quantity = 0;
+				        }
+				
+				        let pname = data[i].pname;
+				        let stock = data[i].stock;
+				        let total = stock - quantity;
+				
+				        if (quantity >= 0) {
+				            result += pname + " --> " + total + " 개" + "<br>";
+				        }
+				    }
+				
+				    document.querySelector("#show3").innerHTML = "<br>" + "남은 수량 : " + "<br>" + result;
+				}
+            }
+        }
+
+        document.querySelector("#btn2").addEventListener("click", () => {
+            xhr = new XMLHttpRequest();
+
+            xhr.onreadystatechange = function(){
+                if(xhr.readyState === XMLHttpRequest.DONE){
+                    if(xhr.status === 200){
+                        process2();
+                    }
+                }
+            }
+
+            url = "soda";
+            xhr.open("GET", url, true)
+            xhr.send();
+        })
+
+        function process2(){
+            let data = JSON.parse(xhr.responseText);
+            let str = "<table border='1'><tr><th>제품명</th><th>설명</th><th>가격</th><th>주문수량</th></tr>"
+
+            for(let i=0; i<data.length; i++){
+                str += "<tr>";
+                str += "<td>" + data[i].pname + "</td>";
+                str += "<td>" + data[i].description + "</td>";
+                str += "<td>" + data[i].price + "</td>";
+                str += "<td>" + "<input type='number' value='0' min='0' name='sodasu' id='sodasu" + i + "'>" + "</td>";
+                str += "</tr>";
+            }
+
+            str += "</table>";
+            str += "<input type='button' id='btn4' name='order' value='확인'>"
+            document.querySelector("#show1").innerHTML = str;
+
+            document.querySelector("#btn4").onclick = function(){
+                let sodaTotal = 0;
+
+                for (let i = 0; i < data.length; i++) {
+                    let quantity = parseInt(document.querySelector("#sodasu" + i).value, 10); //10은 10진수로 해석하도록 지정한 것
+                    if (isNaN(quantity)) { // 입력값이 숫자가 아니면 0으로 처리
+                        quantity = 0;
+                    }
+                    let price = data[i].price;
+                    sodaTotal += quantity * price;
+                }
+
+                document.querySelector("#show2").innerHTML = "<br>" + "총 음료 가격: " + sodaTotal + " 원" + "&nbsp;&nbsp;&nbsp;" +
+                "<input type='button' id='btn6' value='계산 확인'>";
+                
+                document.querySelector("#btn6").onclick = function(){
+				    let result = "";
+				
+				    for (let i = 0; i < data.length; i++) {
+				        let inputElement = document.querySelector("#sodasu" + i);
+				        let quantity = parseInt(inputElement.value, 10);
+				        if (isNaN(quantity)) {
+				            quantity = 0;
+				        }
+				
+				        let pname = data[i].pname;
+				        let stock = data[i].stock;
+				        let total = stock - quantity;
+				
+				        if (quantity >= 0) {
+				            result += pname + " --> " + total + " 개" + "<br>";
+				        }
+				    }
+				
+				    document.querySelector("#show3").innerHTML = "<br>" + "남은 수량 : " + "<br>" + result;
+				}
+            }
+        }
+    }
+</script>
+</head>
+<body>
+메뉴 : <input type="submit" id="btn1" name="burger" value="버거">
+<input type="submit" id="btn2" name="soda" value="음료"> 이벤트
+<a href="/adminpage">관리자</a>
+<br>
+<div id="show1"></div>
+<div id="show2"></div>
+<div id="show3"></div>
+</body>
+</html>

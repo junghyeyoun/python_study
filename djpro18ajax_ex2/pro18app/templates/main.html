@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+	<script>
+		$(document).ready(function () {
+			$(".pcate").click(function (event) {
+				event.preventDefault();
+				var category = $(this).data('category');
+				$("#showData").empty();
+
+				$.ajax({
+					url: "list",
+					type: "get",
+					dataType: 'json',
+					data: {'category': category},
+					success: function (data) {
+						if (data.length === 0) {
+							$("#showData").empty();
+							$("#showData").append("해당상품이 없습니다.");
+						} else {
+							let str = "<table border='1'><tr><th>제품명</th><th>설명</th><th>가격</th><th>재고</th><th>주문수량입력</th><th>소계</th><th>남은 수량</th><tr> ";
+							let count = 0;
+							$.each(data, function (ind, entry) {
+								str += "<tr>";
+								str += "<td>" + entry["pname"] + "</td>";
+								str += "<td>" + entry["description"] + "</td>";
+								str += "<td>" + entry["price"] + "</td>";
+								str += "<td class='stock-info'>" + entry['stock'] + "</td>";
+								str += "<td>" + "주문수량 : <input type='text' class='jumun-input' data-price='" + entry['price'] + "' data-stock=' " + entry['stock'] + " '> <input type='button' class='jumun-confirm' value='확인'" + "</td>";
+								str += "<td class='jumun-subtotal'>0</td>";
+								str += "<td class='stock-info'></td>"
+								str += "</tr>";
+								count += 1;
+							});
+							str += "</table>";
+							$("#showData").append(str);
+							$("#showData").append("총 상품 수 : " + count);
+						}
+					},
+					error: function () {
+						$("#showData").text("에러");
+					}
+				});
+
+				// '확인' 버튼을 눌렀을 때 해당 행의 소계 업데이트
+				$("#showData").on("click", ".jumun-confirm", function () {
+					let row = $(this).closest("tr");
+					let quantity = parseInt(row.find(".jumun-input").val(), 10);
+					if (!isNaN(quantity)) {
+						let price = parseInt(row.find(".jumun-input").data("price"), 10);
+						let stock = parseInt(row.find(".jumun-input").data("stock"), 10);
+						let id = row.find(".jumun-input").data("id"); // 상품 ID 가져오기
+						let subtotal = quantity * price;
+						row.find(".jumun-subtotal").text(subtotal);
+
+						// 화면에 남은 재고 업데이트
+						let remainingStock = stock - quantity;
+						row.find(".stock-info").text(remainingStock);
+
+						// 전체 가격 업데이트
+						updateTotalPrice();
+
+						
+					}
+				});
+				function updateTotalPrice() {
+					let total = 0;
+					// 모든 주문 행의 소계 합계 계산
+					$(".jumun-subtotal").each(function () {
+						total += parseInt($(this).text(), 10);
+					});
+
+					$("#total-price").text(total);
+				}
+			});
+		});
+	</script>
+
+</head>
+
+<body>
+	메뉴 : <a class="pcate" href="" data-category="1">버거</a>&nbsp;&nbsp;<a class="pcate" href="#"
+		data-category="2">음료</a>&nbsp;&nbsp;이벤트&nbsp;&nbsp;<a href="/seller">관리자</a>
+	<div id="showData"></div>
+	전체 가격 : <span id="total-price" style="font-size: 50px;" > 0</span>원
+
+</body>
+
+</html>

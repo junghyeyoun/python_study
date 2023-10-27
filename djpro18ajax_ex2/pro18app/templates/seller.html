@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+	$(document).ready(function() {
+		$("#listAll").click(function(evnet) {
+			event.preventDefault();
+			$("#productAddForm").empty();
+			$("#showData").empty();
+			
+			$.ajax({
+				url:"list_all",
+				type:'get',
+				dataType: 'json',
+				success:function(data) {
+					if(data.length === 0){
+						$("#showData").empty();
+						$("#showData").append("해당자료가 없습니다.");
+					}else{
+						let str = "<table border='1'><tr><th>id</th><th>분류</th><th>상품명</th><th>가격</th><th>재고량</th><th>설명</th><tr> "
+						let count = 0;
+						$.each(data, function(ind,entry){
+							str +="<tr>";
+							str +="<td>" + entry["id"] +"</td>"
+							str +="<td>" + entry["category"] +"</td>"
+							str +="<td>" + entry["pname"] +"</td>"
+							str +="<td>" + entry["price"] +"</td>"
+							str +="<td>" + entry["stock"] +"</td>"
+							str +="<td>" + entry["description"] +"</td>"
+							str +="</tr>";
+							count += 1;
+						});
+						str += "</table>"
+						$("#showData").append(str);
+						$("#showData").append("총 상품 수 : "+count)
+					}
+				}, 
+				error:function() {
+					$("#showData").text("에러");
+					}
+			})
+		})
+		
+		$("#prdapp").click(function (event) {
+			$("#showData").empty();
+            event.preventDefault();
+            openProductAddForm();
+         });
+
+         $(document).on("click", "#addProduct", function (event) {
+            event.preventDefault();
+            // 입력된 상품 정보를 가져와서 Ajax를 사용하여 처리
+            let category = $("input[name='category']:checked").val();
+            let pname = $("#pname").val();
+            let price = $("#price").val();
+            let stock = $("#stock").val();
+            let description = $("#description").val();
+
+            // 여기서 Ajax를 사용하여 서버로 데이터를 전송하고 처리하는 로직을 작성
+            // 예를 들어, 데이터를 서버로 전송하여 상품 추가 처리를 수행합니다.
+            $.ajax({
+               url: 'insert',
+               type: 'get',
+               data: {
+                  'category': category,
+                  'pname': pname,
+                  'price': price,
+                  'stock': stock,
+                  'description': description,
+               }, success: function () {
+                  alert('추가 성공');
+               },
+               error: function () {
+                  $("#showData").text("에러");
+               }
+            });
+         });
+
+         function openProductAddForm() {
+            // 상품 추가 폼을 생성하고 표시
+            let form = `
+                    <form>
+                        분류 :
+                        <input type="radio" name="category" value="1" checked="checked" /> 버거
+                        <input type="radio" name="category" value="2" /> 음료
+                        <br />
+                        품명 : <input type="text" id="pname">
+                        <br />
+                        가격 : <input type="number" id="price">
+                        <br />
+                        재고 : <input type="number" id="stock">
+                        <br /><br />
+                        설명 :<textarea id="description" cols="50" rows="5"></textarea>
+                        <br /><br />
+                        <button type="button" id="addProduct">추가</button>
+                    </form>
+                `;
+            $("#productAddForm").html(form);
+            
+         }
+      });
+
+</script>
+</head>
+<body>
+<h2>관리자</h2>
+메뉴: <a id="listAll" href="#">상품 보기</a>&nbsp;&nbsp;<a  id="prdapp"  href="#">상품 추가</a>&nbsp;&nbsp;<a href="/">메인화면</a>
+<div id="showData"></div>
+<div id="productAddForm"></div>
+</body>
+</html>

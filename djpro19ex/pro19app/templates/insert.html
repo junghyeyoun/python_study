@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	window.onload = function(){
+		document.getElementById("btnOk").onclick=confirmFunc;
+		document.getElementById("btnShow").onclick=function(){
+			location.href="/adminpage"
+			
+		};
+	}
+	
+	function confirmFunc(){
+		if(frm.pname.value === ""){
+			frm.pname.placeholder = "품명을 입력하시오.";
+			return false;
+		}
+		if(frm.price.value === ""){
+			frm.price.placeholder = "가격을 입력하시오.";
+			return false;
+		}
+		if(frm.stock.value === ""){
+			frm.stock.placeholder = "재고를 입력하시오.";
+			return false;
+		}
+		if(frm.description.value === ""){
+			frm.description.placeholder = "설명을 입력하시오.";
+			return false;
+		}
+		frm.submit()
+	}
+</script>
+</head>
+<body>
+상품 추가<p/>
+<form action="/insertok" method="post" name="frm" onsubmit="return false">{%csrf_token%}
+	<table>
+		<tr>
+			<td>분 류</td>
+			<td>
+				<input type="radio" name="category" value="버거" checked>버거
+				<input type="radio" name="category" value="음료">음료
+			</td>
+		</tr>
+		<tr>
+			<td>품 명</td>
+			<td><input type="text" name="pname"></td>
+		</tr>
+		<tr>
+			<td>가 격</td>
+			<td><input type="text" name="price"></td>
+		</tr>
+		<tr>
+			<td>재 고</td>
+			<td><input type="text" name="stock"></td>
+		</tr>
+		<tr>
+			<td>설명 : </td>
+			<td>
+				<textarea rows="5" cols="50" name="description"></textarea>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="4">
+				<input type="button" id="btnOk" value="등록하기">
+				<input type="button" id="btnShow" value="목록보기">
+			</td>
+		</tr>
+	</table>
+</form>
+</body>
+</html>
