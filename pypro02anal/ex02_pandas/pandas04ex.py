@@ -1,6 +1,5 @@
 # 문제 3번
 import pandas as pd 
-import numpy as np
 
 df = pd.read_csv('https://raw.githubusercontent.com/pykwon/python/master/testdata_utf8/titanic_data.csv')  
 print(df)
@@ -15,8 +14,7 @@ print(survived_by_age_group)
 
 # 2) 성별 및 선실에 대한 자료를 이용해서 생존여부(Survived)에 대한 생존율을 피봇테이블 형태로 작성한다. 
 # index에는 성별(Sex)를 사용하고, column에는 선실(Pclass) 인덱스를 사용한다.
-pivot_result = df.pivot_table(values=['Survived'], index=['Sex','Age'],columns=['Pclass'],aggfunc='mean')*100
-
+pivot_result = df.pivot_table(values=['Survived'], index=['Sex','Age_Group'],columns=['Pclass'],aggfunc='mean')*100
 pivot_result = pivot_result.round(2)
 
 print(pivot_result)
@@ -44,6 +42,7 @@ print()
 print(df2)
 print(f'평균 Career: {avg_career}')
 print(f'평균 Score: {avg_score}')
+print(df2.mean())
 
 #2) tips.csv 파일을 읽어 아래와 같이 처리하시오.
 # - 파일 정보 확인
