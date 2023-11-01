@@ -76,3 +76,59 @@ import re
 links2 = soup3.find_all(href=re.compile(r'^https'))
 for j in links2:
     print(j.attrs['href'])
+
+'''
+print('\n벅스 뮤직 사이트에서 곡 제목 읽기')
+from urllib.request import urlopen
+url = urlopen("https://music.bugs.co.kr/chart")
+soup = BeautifulSoup(url.read(),'html.parser')
+# print(soup)
+musics = soup.find_all('td',class_='check')
+# print(musics)
+for i, music in enumerate(musics):
+    print("{}위 : {}".format(i+1,music.input['title']))
+    '''
+    
+print('\n select_one, select : css의 셀렉터를 사용 ------------------------------------')
+htmlData4 = """
+<html>
+<body>
+<div id="hello">
+    <a href="https://www.naver.com">네이버</a><br>
+    <span>
+        <a href="https://www.daum.com">다음</a><br>
+    </span>
+
+<ul class="world"> 
+    <li>안녕</li>
+    <li>반갑</li>
+</ul>
+</div>
+<div id="hi" class="good"> 
+     두번째 디브 태그
+</div>
+</body>
+</html>
+"""
+
+soup4 = BeautifulSoup(htmlData4, 'lxml')
+kbs = soup4.select_one("div#hello > a") # 단수 선택
+print('kbs : ',kbs,' ',kbs.string)
+kbs2 = soup4.select_one("div.good")
+print('kbs2 : ',kbs2,' ',kbs2.string)
+print()
+
+mbc = soup4.select("div#hello ul.world li")  # 복수 선택
+print('mbc : ', mbc)
+for a in mbc:
+    print(a.string, ' ')
+    
+print()
+msg = list()
+for a in mbc:
+    msg.append(a.string)
+
+import pandas as pd
+df = pd.DataFrame(msg, columns=['자료'])
+print(df)
+print(df.to_json())
