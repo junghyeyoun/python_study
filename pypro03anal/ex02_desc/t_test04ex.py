@@ -110,7 +110,7 @@ print(stats.levene(pay1, pay2).pvalue)
 
 print(np.mean(pay1),np.mean(pay2)) # 5414.285714285715 4908.333333333333
 
-result2 = stats.mannwhitneyu(pay1, pay2) 
+result2 = stats.mannwhitneyu(pay1, pay2)  
 print('\nt-value : %.5f, p-value : %.5f'%result2)
 
 # 판정 : p-value -> 0.65239 > 0.05 귀무 채택
