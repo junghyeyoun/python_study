@@ -19,7 +19,7 @@ print(wt_data.info())
 wt_data.tm = wt_data.tm.map(lambda x:x.replace('-',''))
 print(wt_data.head(3))
 
-# merge
+# merge 
 frame = sales_data.merge(wt_data, how='left',left_on='YMD',right_on='tm')
 print(frame.head(3))
 print(frame.tail(3),frame.shape)
