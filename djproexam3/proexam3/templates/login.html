@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<form action="gogo" method="post">{% csrf_token%}
+	사번 : <input name="jikwon_no" type="text"><br>
+	이름 : <input name="jikwon_name" type="text">
+	<input type="submit" value="로그인">
+</form>
+</body>
+</html>
