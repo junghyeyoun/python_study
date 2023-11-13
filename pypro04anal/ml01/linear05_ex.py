@@ -5,32 +5,34 @@
 #   - 국어, 영어 점수를 입력하면 수학 점수 예측
 
 import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
 import statsmodels.formula.api as smf
 import statsmodels.api
 import numpy as np
-plt.rc('font', family='malgun gothic')
 
-student = pd.read_csv('../testdata/student.csv')
-print(student.head(3))
-print(student.iloc[:,1:4].corr())
+df=pd.read_csv('../testdata/student.csv', encoding='utf-8')
+print(df.head(3))
+print(df.iloc[:,1:].corr())
 
-result = smf.ols(formula='국어 ~ 수학', data = student).fit()
-print('result 모델 정보 : ', result.summary())
-print('result R squared : ', result.rsquared)
-print('result p-value : ', result.pvalues[1])  # 8.160795225697216e-05 < 0.05이므로 유의한 모델
+# 국어 점수를 입력하면 수학점수 예측
+kor1 = int(input('국어 : '))
+result=smf.ols(formula='수학 ~ 국어', data=df).fit()
+print(result.summary())  # Prob (F-statistic): 8.16e-05 < 0.05이므로 의미있는 모델
+# print('국어:{}에 대한 수학 예측 결과:{}'.format(kor1, 0.5705 * kor1 + 32.1069))
 
-'''
-# 국어 점수를 입력하면 수학 점수 예측
-new_data = pd.DataFrame({'국어':[80,70,65]})
-result2 = result.predict(new_data)
-print('예측 결과 : ', result2.values)
+newdf = pd.DataFrame({'국어':[kor1]})
+new_pred = result.predict(newdf)
+print('국어:{}에 대한 수학 예측 결과:{}'.format(newdf, new_pred[0]))
 
-'''
+
 # 국어, 영어 점수를 입력하면 수학 점수 예측
-column_select = "+".join(result.columns.difference(['국어','영어']))
-print(column_select)
-result3 = smf.ols(formula='수학 ~ ' + column_select, data=result).fit()
-print('result3 모델 정보 : ', result3.summary())
-plt.show()
+result2 = smf.ols(formula='수학 ~ 국어 + 영어', data=df).fit()
+print('result2 모델 정보 : ', result2.summary()) # Prob (F-statistic): 0.000105 < 0.05이므로 의미있는 모델
+
+kor2 = int(input('국어 : '))
+eng = int(input('영어 : '))
+
+# print('국어:{}, 영어:{} 수학점수:{}'.format(kor2,eng, result2.predict(pd.DataFrame({'국어':kor2,'영어':eng}))))
+
+newdf2 = pd.DataFrame({'국어':[kor1],'영어':[eng]})
+new_pred2 = result2.predict(newdf2) 
+print('국어:{}, 영어:{}에 대한 수학 예측 결과:{}'.format(newdf2['국어'][0] ,newdf2['영어'][0], new_pred2[0]))

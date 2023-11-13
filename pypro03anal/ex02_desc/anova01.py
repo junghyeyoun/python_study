@@ -26,14 +26,14 @@ data = pd.read_csv(urllib.request.urlopen(url), na_values=' ')
 data = data.dropna()
 print(data.head(3), data.shape) # (80, 4)
 
-#plt.boxplot(data.score)
-#plt.hist(data.score)
-#plt.show() # 이상치(outlier) 발견
+plt.boxplot(data.score)
+plt.hist(data.score)
+plt.show() # 이상치(outlier) 발견
 
 data = data.query('score <= 100')
 print(data.shape)
-# plt.hist(data.score)
-# plt.show() 
+plt.hist(data.score)
+plt.show() 
 
 # 분산분석의 전제조건 : 3가지를 충족할 때 의미있다.
 # 독립성 : 각 집단은 서로 독립이어야 한다. (상관관계로 확인)
