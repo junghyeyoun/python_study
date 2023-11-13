@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Main</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .btn-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .btn-primary {
+            background-color: #ff3d00; /* 버튼 배경색을 엄청 강조된 주황색으로 변경 */
+            border-color: #ff3d00; /* 버튼 테두리 색상도 변경 */
+            color: #fff; /* 버튼 텍스트 색상을 흰색으로 변경 */
+            box-shadow: 0 6px 12px rgba(255, 61, 0, 0.5); /* 그림자 추가 */
+            padding: 20px; /* 내용물과 버튼 테두리 간의 간격을 크게 조절 */
+            font-size: 24px; /* 텍스트 크기를 크게 조절 */
+        }
+
+        .btn-primary:hover {
+            background-color: #d50000; /* 마우스 호버 시 색상 변경 */
+            border-color: #d50000;
+            box-shadow: 0 6px 12px rgba(213, 0, 0, 0.5);
+        }
+    </style>
+</head>
+<body>
+<div class="btn-container">
+    <a href="survey" class="btn btn-primary btn-lg" tabindex="-1" role="button">설문 조사</a>
+    <a href="survey_list" class="btn btn-primary btn-lg" tabindex="-1" role="button">설문 결과 분석지</a>
+</div>
+</body>
+</html>

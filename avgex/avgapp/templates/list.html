@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 125px;
+        }
+
+        .result-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        p {
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
+
+</head>
+<body>
+{{ data|safe }}
+<div class="result-container">
+    <h2>One-Way ANOVA Result</h2>
+    <p>{{ result_anova|safe }}</p>
+</div>
+
+<div class="result-container">
+    <h2>T TEST Result</h2>
+    <p>{{ result_ttest|safe }}</p>
+</div>
+
+<div style="display: flex">
+    <!-- 성별별 차트 -->
+        <canvas id="gender_chart" width="500" height="200"></canvas>
+    <!-- 직업별 차트 -->
+    <div>
+        <button id="changeChartButton">차트 타입 변경</button>
+        <canvas id="job_chart" width="500" height="500"></canvas>
+    </div>
+</div>
+
+
+<script>
+
+// 성별별 데이터 처리
+const gender_data = {
+    // 차트의 레이블
+    labels: ['남성', '여성'],
+    // 차트의 데이터를 담고 있는 배열, 각 데이터셋은 label, backgroundColor, data로 구성
+    datasets: [{
+        // 각 막대의 색상을 지정
+        backgroundColor: ['lightgreen', 'pink'],
+        // 차트에 들어갈 데이터
+        data: [{{man_avg}}, {{woman_avg}}],
+    }],
+};
+
+// 성별 차트 설정
+const gender_config = {
+    type: 'bar',
+    data: gender_data,
+    options: {
+        responsive: false,
+        scales: {
+            x: {},
+            y: {
+                beginAtZero: true,
+                stepSize: 1,
+                max: 10,
+            },
+        },
+        plugins: {
+            legend: {
+                display: false,
+            },
+            title: {
+                display: true,
+                text: '성별에 따른 자료 차트'
+            }
+        },
+    },
+};
+
+// 직업별 데이터
+const job_data = {
+    labels: [{% for row in job_data.values %}'{{ row.0 }}',{% endfor %}],
+    datasets: [{
+        label: '직업에 따른 게임 사용 시간',
+        backgroundColor: [ 'pink','lightyellow','orange','lightgreen'],
+        data: [{% for row in job_data.values %}{{ row.1 }},{% endfor %}],
+    }],
+};
+
+// 직업 차트 설정
+const job_config = {
+    type: 'pie',
+    data: job_data,
+    options: {
+        responsive: false,
+        plugins: {
+            legend: {
+                position: 'top',
+            },
+            title: {
+                display: true,
+                text: '직업별 자료 차트'
+            }
+        }
+    },
+};
+
+// chart 출력을 위한 객체 생성
+let genderChart = new Chart(document.getElementById('gender_chart'), gender_config);
+let jobChart = new Chart(document.getElementById('job_chart'), job_config);
+
+
+// 버튼 클릭시, 차트를 도넛 <-> 파이 차트로 변경
+document.getElementById('changeChartButton').addEventListener('click', function() {
+    if (jobChart) {
+        jobChart.destroy();
+    }
+
+    job_config.type = job_config.type === 'pie' ? 'doughnut' : 'pie';
+    jobChart = new Chart(document.getElementById('job_chart'), job_config);
+});
+
+</script>
+
+
+</body>
+</html>
