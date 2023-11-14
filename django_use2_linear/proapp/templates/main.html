@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script>
+        function sendData() {
+            var yearsOfWork = document.getElementById("yearsOfWork").value;
+
+            $.ajax({
+                url: "go",
+                type: "post",
+                data: { yearsOfWork: yearsOfWork },
+                dataType: "json",
+                success: function (data) {
+                    $('#predicted_salary').text(data.predicted_salary);
+                    $('#r2').text(data.r2);
+
+                    // 직급별 연봉평균 데이터를 받아와서 출력
+                    var jk_payavg = data.jk_payavg;
+
+                    // HTML에 출력
+                    var jk_payavg_html = "<ul>";
+                    for (var key in jk_payavg) {
+                        jk_payavg_html += "<li>" + key + ": " + jk_payavg[key] + "</li>";
+                    }
+                    jk_payavg_html += "</ul>";
+
+                    $('#jk_payavg').html(jk_payavg_html); // HTML에 출력
+                },
+                error: function (xhr, status, error) {
+                    console.error(xhr.responseText);
+                }
+            });
+        }
+    </script>
+</head>
+
+<body>
+    <hr>
+    근무 년수 : <input type="number" id="yearsOfWork">
+    <button onclick="sendData()">전송</button><br>
+    예상연봉액 : <span id="predicted_salary"></span><br>
+    설명력 : <span id="r2"></span><br>
+    직급별 연봉평균 : <span id="jk_payavg"></span><br>
+    <hr>
+</body>
+
+</html>
