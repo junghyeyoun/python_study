@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript">
+function predFunc(){
+	let sendData = {};
+	let year = $("#year").val();
+	sendData['year'] = year;
+	// console.log(sendData);
+	
+	$(".predPay").empty();
+	$(".r2").empty();
+	$(".listPay").empty();
+	
+	$.ajax({
+		url:"predict",
+		type:"post",	// 받는 함수에 @csrf_exempt 적용
+		data:sendData,
+		dataType:"json",
+		success:function(data){
+			$(".predPay").append(`근무년수 <b>${year}년</b> 에 대한 예상 연봉은 <b>${data.new_pred}</b>`);			
+			$(".r2").append(data.r2,'%');		
+			$(".listPay").append(data.pay_jik);
+		}
+	});
+}
+</script>
+</head>
+<body>
+<h2>근무년수에 대한 연봉</h2>
+<hr>
+근무년수 : <input type="text" id="year" value="1">년 &nbsp;&nbsp;
+<button onclick="predFunc()">확인</button>
+<br><br>
+예상연봉액 : <div class="predPay" style="display: inline;"></div>
+설명력 : <span class="r2"></span>
+<br><br>
+직급별 연봉 평균 : <br>
+<div class="listPay"></div>
+</body>
+</html>
