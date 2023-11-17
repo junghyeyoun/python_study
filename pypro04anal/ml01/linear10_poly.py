@@ -9,8 +9,8 @@ from sklearn.metrics import r2_score
 x = np.array((1,2,3,4,5))
 y = np.array((4,2,1,3,7))
 
-# plt.scatter(x, y)
-# plt.show()
+plt.scatter(x, y)
+plt.show()
 
 print(np.corrcoef(x,y)) # 0.48076197 의미없다. -> 데이터의 분포가  곡선의 형태이기 때문
 
@@ -24,11 +24,11 @@ model = LinearRegression().fit(x, y)
 ypred = model.predict(x)
 print('ypred : ',ypred)
 
-# plt.scatter(x, y)
-# plt.plot(x, ypred, c='red')
-# plt.show()
-#
-# print('r2_score : ', r2_score(y, ypred))
+plt.scatter(x, y)
+plt.plot(x, ypred, c='red')
+plt.show()
+
+print('r2_score : ', r2_score(y, ypred))
 
 # feature에 항(다항식 특징)을 추가 
 from sklearn.preprocessing import PolynomialFeatures 

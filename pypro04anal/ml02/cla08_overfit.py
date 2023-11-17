@@ -74,8 +74,30 @@ print('교차 검증별 정확도 : ',np.round(score, 3))
 print('모델 생성 도중 평균 검증 정확도 : ', np.round(np.mean(score),3)) # 0.96
 
 # StratifiedKFold : 불균형한 분포를 가진 레이블 데이터인 경우 사용. ex) 대출사기 - 대부분 정상, 극히 일부 사기
-from sklearn.model_selection import StratifiedKFold 
+# from sklearn.model_selection import StratifiedKFold 
 # ...
 
 print('\n과적합 방지 방법 3 : GridSearchCV')
-from sklearn.model_selection import GridSearchCV
+from sklearn.model_selection import GridSearchCV  # 모델 생성시 최적의 파라미터 찾기
+parameters = {'max_depth' : [1,2,3], 'min_samples_split':[2,3]}
+
+grid_dtree = GridSearchCV(dt_clf, param_grid=parameters, cv=3, refit=True)
+# refit=True 최적의 파라미터를 위해 재학습을 시도.
+# 최적의 Estimator(추정치) 모델을 찾기 위해 학습을 반복
+
+grid_dtree.fit(x_train, y_train)    # 자동으로 복수의 내부 모형을 생성하고 실행시켜 파라미터를 찾아줌.
+
+import pandas as pd 
+score_df = pd.DataFrame(grid_dtree.cv_results_)
+print(score_df)
+
+print('GridSearchCV가 추천한 최적 파라미터 : ',grid_dtree.best_params_)
+print('GridSearchCV가 추천한 최적 정확도 : ',grid_dtree.best_score_)
+
+print()
+estimator = grid_dtree.best_estimator_
+print(estimator)
+
+pred = estimator.predict(x_test)
+print(pred)
+print('estimator(추천된 DecisionTreeClassifier) 정확도 : ', accuracy_score(y_test, pred))
