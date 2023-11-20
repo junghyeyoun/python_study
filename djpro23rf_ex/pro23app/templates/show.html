@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+</head>
+
+<body>
+	<p style="font-size: 24px;">입원 환자 데이터를 입력해 생사 여부 확인을 위한 자료 입력</p>
+	AGE : 나이<br />
+	SEX : 성별<br />
+	RACE : 인종<br />
+	SER : 중환자 치료실에서 받은 치료<br />
+	CAN : 암 존재 여부<br />
+	INF : 중환자 치료실에서의 감염 여부<br />
+	CPR : 중환자 치료실 도착 전 CPR여부<br />
+	HRA : 중환자 치료실에서의 심박수<br />
+	<table>
+		<tr>
+			<th style="font-weight: normal;">예)</th>
+			<th style="font-weight: normal;">AGE</th>
+			<th style="font-weight: normal;">SEX</th>
+			<th style="font-weight: normal;">RACE</th>
+			<th style="font-weight: normal;">SER</th>
+			<th style="font-weight: normal;">CAN</th>
+			<th style="font-weight: normal;">CRN</th>
+			<th style="font-weight: normal;">INF</th>
+			<th style="font-weight: normal;">CPR</th>
+			<th style="font-weight: normal;">HRA</th>
+		</tr>
+		<tr>
+			<td></td>
+			<td>27</td>
+			<td>1</td>
+			<td>1</td>
+			<td>0</td>
+			<td>0</td>
+			<td>0</td>
+			<td>1</td>
+			<td>0</td>
+			<td>88</td>
+		</tr>
+	</table>
+	<form action="list" method="post">{% csrf_token %}
+		<table border="1">
+			<tr>
+				<th>
+					<label for="age">AGE</label><br />
+					<input type="text" name="age" id="age">
+				</th>
+				<th>
+					<label for="sex">SEX</label><br />
+					<input type="text" name="sex" id="sex">
+				</th>
+				<th>
+					<label for="race">RACE</label><br />
+					<input type="text" name="race" id="race">
+				</th>
+				<th>
+					<label for="ser">SER</label><br />
+					<input type="text" name="ser" id="ser">
+				</th>
+
+				<th>
+					<label for="can">CAN</label><br />
+					<input type="text" name="can" id="can">
+				</th>
+			</tr>
+			<tr>
+				<th>
+					<label for="crn">CRN</label><br />
+					<input type="text" name="crn" id="crn">
+				</th>
+				<th>
+					<label for="inf">INF</label><br />
+					<input type="text" name="inf" id="inf">
+				</th>
+				<th>
+					<label for="cpr">CPR</label><br />
+					<input type="text" name="cpr" id="cpr">
+				</th>
+				<th>
+					<label for="hra">HRA</label><br />
+					<input type="text" name="hra" id="hra">
+				</th>
+			</tr>
+			<tr>
+				<th colspan="4">
+					<input type="submit" value="확인">
+				</th>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>
