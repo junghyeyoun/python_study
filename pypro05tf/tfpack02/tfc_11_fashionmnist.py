@@ -1,4 +1,4 @@
-# 
+# fashion mnist : mnist와 구조는 같음
 import tensorflow as tf  
 import sys 
 import numpy as  np 

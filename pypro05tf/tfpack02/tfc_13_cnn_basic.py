@@ -99,7 +99,7 @@ plot_loss(history)
 plt.show()
 
 # 모델 저장
-model.save('tfc_13_model.h5')
+model.save('tfc_13_model.h5') # 모델 확장자 keras로 주면 오류 안떨어짐
 
 # ------------------------------
 # 새이미지 분류 작업 ... 
